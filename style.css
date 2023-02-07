@@ -1,0 +1,155 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    margin-left: 50px;
+    margin-top: -87.5px;
+    border-radius: 15px;
+    width: 200px;
+    height: 600px;
+    background-color:  rgba(10, 70, 65, 0.6);
+}
+
+#canvas {
+    background-color: black;
+    float: right;
+    margin-left: 70px;
+    border-radius: 15px;
+}
+
+form {
+    width: 400px;
+    height: 600px;
+    background-color: rgb(10, 70, 65);
+    border-radius: 15px;
+}
+
+div {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#divShape {
+    margin-left: 0px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+
+#divAmount {
+    float: right;
+    margin-right: 50px;
+    margin-top: -20px;
+}
+
+h2 {
+    color: white;
+    padding-left: 20px;
+    margin-bottom: 40px;
+}
+
+#h2Rockets {
+    margin-left: 50px;
+}
+
+p {
+    color: white;
+}
+
+input[type="text"] {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1.5px solid rgb(0, 0, 0);
+}
+
+input[type="text"]:hover {
+    cursor: pointer;
+}
+
+input[type="text"]:focus {
+    outline-style: none;
+}
+
+#name {
+    padding-left: 10px;
+}
+
+#pColor1, #pColor2 {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#pColor2 {
+    margin-left: 70px;
+}
+
+input[type="color"] {
+    cursor: pointer;
+    border-radius: 5px;
+    width: 60px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    margin-left: -2px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 5px;    
+}
+
+#amount::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    border: solid rgba(10, 70, 65, 0.6);
+    background: white;
+    cursor: pointer;
+  }
+
+form, canvas {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}
+
+#particle1, #particle2, #particle3 {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    margin-right: 5px;
+}
+
+#particle1 {
+    padding-left: 5.5px;
+}
+
+#explosion1, #explosion2 {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1.5px solid black;
+}
+
+#explosion2 {
+    margin-left: 10px;
+}
+
+#addRocket {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1.5px solid black;
+    margin-top: 25px;
+}

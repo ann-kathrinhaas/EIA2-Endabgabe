@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feuerwerk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="Rocket/Rocket.js"></script>
+    <script src="Circle/Circle.js"></script>
+    <script src="Drop/Drop.js"></script>
+    <script src="Line/Line.js"></script>
+    <script src="Main/Main.js"></script>
+</head>
+<body>
+
+    <form action="">
+        <h2>Create a new rocket</h2>
+        <div>
+            <input type="text" name="Text" id="name" placeholder="Rocket Name">
+        </div>
+        <div>
+            <p id="pColor1">Color 1</p>
+            <input type="color" name="Color" id="color1">
+            <p id="pColor2">Color 2</p>
+            <input type="color" name="Color" id="color2">
+        </div>
+        <div>
+            <p>Particles</p>
+            <div id="divShape">
+                <p>Shape</p>
+                <button id="particle1"><i class="fa-solid fa-circle"></i></button>
+                <button id="particle2"><i class="fa-solid fa-droplet"></i></button>
+                <button id="particle3"><i class="fa-sharp fa-solid fa-grip-lines-vertical"></i></button>
+            </div>
+            <div id="divAmount">
+                <p>Amount</p>
+                <input type="range" name="Slider" id="amount" min="15" max="100" step="1" value="1">
+            </div>
+        </div>
+        <div>
+            <p>Explosion</p>
+            <button id="explosion1">Explosion 1</button>
+            <button id="explosion2">Explosion 2</button>
+        </div>
+        <div>
+            <button id="addRocket">Add Rocket</button>
+        </div>
+    </form>
+
+    <div>
+        <h2 id="h2Rockets">Rockets</h2>
+        <ul id="list"></ul>
+    </div>
+
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+</body>
+</html>
