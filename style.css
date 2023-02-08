@@ -18,6 +18,7 @@ ul {
     float: right;
     margin-left: 70px;
     border-radius: 15px;
+    height: 600px;
 }
 
 form {
@@ -40,7 +41,7 @@ div {
     margin-top: -20px;
 }
 
-#divAmount {
+#divSize {
     float: right;
     margin-right: 50px;
     margin-top: -20px;
@@ -102,7 +103,7 @@ input[type="range"] {
     height: 5px;    
 }
 
-#amount::-webkit-slider-thumb {
+#size::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 15px;

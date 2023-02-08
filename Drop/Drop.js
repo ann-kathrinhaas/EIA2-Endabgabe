@@ -2,9 +2,8 @@
 var Feuerwerk;
 (function (Feuerwerk) {
     class Drop extends Feuerwerk.Rocket {
-        constructor(_position, _name, _color1, _color2) {
-            super(_position, _name, _color1, _color2);
-            this.draw();
+        constructor(_position, _dx, _dy, _size, _name, _color1, _color2) {
+            super(_position, _dx, _dy, _size, _name, _color1, _color2);
         }
         draw() {
             Feuerwerk.crc2.save();
@@ -13,6 +12,12 @@ var Feuerwerk;
             this.drawTriangle(this.position.x - 3, this.position.y - 4, this.position.x + 3, this.position.y - 4, this.position.x + 0, this.position.y - 10, this.color1);
             Feuerwerk.crc2.restore();
             console.log("draw");
+        }
+        explode() {
+            this.draw();
+            this.alpha -= 0.01;
+            this.position.x += this.dx;
+            this.position.y += this.dy;
         }
         drawArc(_x, _y, _radius, _startAngle, _endAngle, _color) {
             Feuerwerk.crc2.beginPath();

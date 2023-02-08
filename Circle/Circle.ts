@@ -1,10 +1,8 @@
 namespace Feuerwerk {
     export class Circle extends Rocket {
 
-        constructor(_position: Vector, _name: string, _color1: string, _color2: string) {
-            super(_position, _name, _color1, _color2);
-
-            this.draw();
+        constructor(_position: Vector,  _dx: number, _dy: number, _size: number, _name: string, _color1: string, _color2: string) {
+            super(_position, _dx, _dy, _size , _name, _color1, _color2);
         }
 
         public draw(): void {
@@ -13,6 +11,13 @@ namespace Feuerwerk {
             this.drawArc(this.position.x, this.position.y, 5, 0, 2 * Math.PI, this.color1);
             crc2.restore();
             console.log("draw");
+        }
+
+        public explode(): void {
+            this.draw();
+            this.alpha -= 0.01;
+            this.position.x += this.dx;
+            this.position.y += this.dy;
         }
 
         private drawArc(_x: number, _y: number, _radius: number, _startAngle: number, _endAngle: number, _color: string): void {
