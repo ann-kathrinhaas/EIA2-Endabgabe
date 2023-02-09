@@ -13,6 +13,12 @@ namespace Feuerwerk {
         y: number;
     }
 
+    export enum SHAPE {
+        CIRCLE,
+        DROP,
+        LINE
+    }
+
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
@@ -61,7 +67,7 @@ namespace Feuerwerk {
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
             let size: number = 5;
 
-            let circle: Rocket = new Drop(position, dx, dy, size, "testRocket", color, color);
+            let circle: Rocket = new Line(position, dx, dy, size, "testRocket", color, color);
 
             particles.push(circle);
         }

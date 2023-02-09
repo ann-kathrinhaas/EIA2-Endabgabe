@@ -11,6 +11,7 @@ var Feuerwerk;
         color1;
         color2;
         alpha;
+        shape;
         //public explosion: Vector;
         constructor(_position, _dx, _dy, _size, _name, _color1, _color2) {
             this.position = _position;

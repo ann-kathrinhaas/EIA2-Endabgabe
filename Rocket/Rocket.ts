@@ -10,6 +10,7 @@ namespace Feuerwerk {
         public color1: string;
         public color2: string;
         public alpha: number;
+        protected shape: SHAPE;
         //public explosion: Vector;
 
         constructor(_position: Vector, _dx: number, _dy: number, _size: number, _name: string, _color1: string, _color2: string) {

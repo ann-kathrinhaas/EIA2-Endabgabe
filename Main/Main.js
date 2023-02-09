@@ -8,6 +8,12 @@ Quellen: Cindy Nguyen
 */
 var Feuerwerk;
 (function (Feuerwerk) {
+    let SHAPE;
+    (function (SHAPE) {
+        SHAPE[SHAPE["CIRCLE"] = 0] = "CIRCLE";
+        SHAPE[SHAPE["DROP"] = 1] = "DROP";
+        SHAPE[SHAPE["LINE"] = 2] = "LINE";
+    })(SHAPE = Feuerwerk.SHAPE || (Feuerwerk.SHAPE = {}));
     window.addEventListener("load", handleLoad);
     //let rockets: Rocket[] = [];
     let particles = [];
@@ -38,7 +44,7 @@ var Feuerwerk;
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
             let size = 5;
-            let circle = new Feuerwerk.Drop(position, dx, dy, size, "testRocket", color, color);
+            let circle = new Feuerwerk.Line(position, dx, dy, size, "testRocket", color, color);
             particles.push(circle);
         }
         console.log(particles);
