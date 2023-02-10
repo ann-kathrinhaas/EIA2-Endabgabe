@@ -18,10 +18,7 @@ namespace Feuerwerk {
         }
 
         public explode(): void {
-            this.draw();
-            this.alpha -= this.alphaTime / 100;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
+            super.explode();
         }
 
         public drawTriangle(_x1: number, _y1: number, _x2: number, _y2: number, _x3: number, _y3: number): void {
