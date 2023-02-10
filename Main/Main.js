@@ -12,10 +12,18 @@ var Feuerwerk;
     (function (SHAPE) {
         SHAPE[SHAPE["CIRCLE"] = 0] = "CIRCLE";
         SHAPE[SHAPE["DROP"] = 1] = "DROP";
-        SHAPE[SHAPE["LINE"] = 2] = "LINE";
+        SHAPE[SHAPE["STAR"] = 2] = "STAR";
     })(SHAPE = Feuerwerk.SHAPE || (Feuerwerk.SHAPE = {}));
+    /*
+        let circleButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle1");
+        circleButton.addEventListener("click", shootRocket);
+    
+        let dropButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle2");
+        dropButton.addEventListener("click", shootRocket);
+    
+        let starButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle3");
+        starButton.addEventListener("click", shootRocket); */
     window.addEventListener("load", handleLoad);
-    //let rockets: Rocket[] = [];
     let particles = [];
     function handleLoad(_event) {
         let canvas = document.querySelector("#canvas");
@@ -23,28 +31,41 @@ var Feuerwerk;
             return;
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
-        canvas.addEventListener("click", Rocket);
+        canvas.addEventListener("click", shootRocket);
         window.setInterval(update, 20);
     }
     function update() {
         requestAnimationFrame(explosionAnimation);
     }
-    function Rocket(_event) {
+    function shootRocket(_event) {
         let canvas = document.querySelector("#canvas");
         let rect = canvas.getBoundingClientRect();
         let positionX = _event.clientX - rect.left;
         let positionY = _event.clientY - rect.top;
         console.log(positionX, positionY);
-        let rgba1 = Math.floor(Math.random() * 255);
-        let rgba2 = Math.floor(Math.random() * 255);
-        let rgba3 = Math.floor(Math.random() * 255);
-        let color = "RGB" + "(" + rgba1 + "," + rgba2 + "," + rgba3 + ")";
-        for (let i = 0; i <= 10; i++) {
+        let formData = new FormData(document.forms[0]); // get form elements
+        let name = formData.get("Name"); // get name
+        let colorPicker1 = formData.get("Color1"); // get color 1
+        let colorPicker2 = formData.get("Color2"); // get color 2
+        let lifetimeString = formData.get("Lifetime"); // get lifetime
+        let lifetime = parseInt(lifetimeString);
+        let amountString = formData.get("Amount"); // get amount
+        let amount = parseInt(amountString);
+        // particles color 1
+        for (let i = 0; i <= amount; i++) {
             let position = { x: positionX, y: positionY };
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
-            let size = 5;
-            let circle = new Feuerwerk.Line(position, dx, dy, size, "testRocket", color, color);
+            let circle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker1);
+            //let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+            particles.push(circle);
+        }
+        // particles color 2
+        for (let i = 0; i <= amount; i++) {
+            let position = { x: positionX, y: positionY };
+            let dx = (Math.random() - 0.5) * (Math.random() * 6);
+            let dy = (Math.random() - 0.5) * (Math.random() * 6);
+            let circle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker2);
             particles.push(circle);
         }
         console.log(particles);

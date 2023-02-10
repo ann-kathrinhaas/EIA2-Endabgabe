@@ -10,7 +10,7 @@
     <script src="Rocket/Rocket.js"></script>
     <script src="Circle/Circle.js"></script>
     <script src="Drop/Drop.js"></script>
-    <script src="Line/Line.js"></script>
+    <script src="Star/Star.js"></script>
     <script src="Main/Main.js"></script>
 </head>
 <body>
@@ -22,9 +22,9 @@
         </div>
         <div>
             <p id="pColor1">Color 1</p>
-            <input type="color" name="Color" id="color1">
+            <input type="color" name="Color1" id="color1" value="#fc52d1">
             <p id="pColor2">Color 2</p>
-            <input type="color" name="Color" id="color2">
+            <input type="color" name="Color2" id="color2" value="#10fae6">
         </div>
         <div>
             <p>Particles</p>
@@ -32,17 +32,18 @@
                 <p>Shape</p>
                 <button id="particle1"><i class="fa-solid fa-circle"></i></button>
                 <button id="particle2"><i class="fa-solid fa-droplet"></i></button>
-                <button id="particle3"><i class="fa-sharp fa-solid fa-grip-lines-vertical"></i></button>
+                <button id="particle3"><i class="fa-sharp fa-solid fa-star"></i></button>
             </div>
-            <div id="divSize">
-                <p>Size</p>
-                <input type="range" name="Size" id="size" min="1" max="10" step="1" value="5">
+            <div id="divAmount">
+                <p>Amount</p>
+                <input type="range" name="Amount" id="amount" min="5" max="10" step="1" value="5">
             </div>
         </div>
         <div>
-            <p>Explosion</p>
-            <button id="explosion1">Explosion 1</button>
-            <button id="explosion2">Explosion 2</button>
+            <div id="divLifetime">
+                <p>Lifetime</p>
+                <input type="range" name="Lifetime" id="lifetime" min="1" max="5" step="1" value="1">
+            </div>
         </div>
         <div>
             <button id="addRocket">Add rocket</button>

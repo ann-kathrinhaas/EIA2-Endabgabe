@@ -13,18 +13,19 @@ ul {
     background-color:  rgba(10, 70, 65, 0.6);
 }
 
-#canvas {
+canvas {
     background-color: black;
     float: right;
     margin-left: 70px;
     border-radius: 15px;
     height: 600px;
+    cursor: pointer;
 }
 
 form {
     width: 400px;
     height: 600px;
-    background-color: rgb(10, 70, 65);
+    background-color: rgba(10, 70, 65, 1);
     border-radius: 15px;
 }
 
@@ -41,10 +42,14 @@ div {
     margin-top: -20px;
 }
 
-#divSize {
+#divAmount {
     float: right;
     margin-right: 50px;
     margin-top: -20px;
+}
+
+#divLifetime {
+    margin-left: 5px;
 }
 
 h2 {
@@ -70,6 +75,7 @@ input[type="text"] {
 
 input[type="text"]:hover {
     cursor: pointer;
+    background-color: rgb(214, 219, 219);
 }
 
 input[type="text"]:focus {
@@ -103,7 +109,7 @@ input[type="range"] {
     height: 5px;    
 }
 
-#size::-webkit-slider-thumb {
+#amount::-webkit-slider-thumb, #lifetime::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 15px;
@@ -112,7 +118,11 @@ input[type="range"] {
     border: solid rgba(10, 70, 65, 0.6);
     background: white;
     cursor: pointer;
-  }
+}
+
+#amount::-webkit-slider-thumb:hover, #lifetime::-webkit-slider-thumb:hover {
+    background-color: rgb(241, 237, 237);
+}
 
 form, canvas {
     display: block;
@@ -120,6 +130,10 @@ form, canvas {
 
 button {
     cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(214, 219, 219);
 }
 
 #particle1, #particle2, #particle3 {
@@ -136,15 +150,9 @@ button {
     padding-left: 5.5px;
 }
 
-#explosion1, #explosion2 {
-    width: 100px;
-    height: 100px;
-    border-radius: 15px;
-    border: 1.5px solid black;
-}
-
-#explosion2 {
-    margin-left: 10px;
+test {
+    background-color: #10fae6;
+    background-color: #fc52d1;
 }
 
 #addRocket {
@@ -153,4 +161,5 @@ button {
     border-radius: 10px;
     border: 1.5px solid black;
     margin-top: 25px;
+    background-color: white;
 }

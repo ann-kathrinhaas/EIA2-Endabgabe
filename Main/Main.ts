@@ -16,16 +16,24 @@ namespace Feuerwerk {
     export enum SHAPE {
         CIRCLE,
         DROP,
-        LINE
+        STAR
     }
+/* 
+    let circleButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle1");
+    circleButton.addEventListener("click", shootRocket);
+
+    let dropButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle2");
+    dropButton.addEventListener("click", shootRocket);
+
+    let starButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle3");
+    starButton.addEventListener("click", shootRocket); */
 
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
 
-    //let rockets: Rocket[] = [];
-
     let particles: Rocket[] = [];
+
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
@@ -35,7 +43,7 @@ namespace Feuerwerk {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         console.log("Canvas");
 
-        canvas.addEventListener("click", Rocket);
+        canvas.addEventListener("click", shootRocket);
 
         window.setInterval(update, 20);
     }
@@ -44,7 +52,7 @@ namespace Feuerwerk {
         requestAnimationFrame(explosionAnimation);
     }
 
-    function Rocket(_event: MouseEvent): void {
+    function shootRocket(_event: MouseEvent): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
         let rect: DOMRect = canvas.getBoundingClientRect();
@@ -52,23 +60,44 @@ namespace Feuerwerk {
         let positionX: number = _event.clientX - rect.left;
         let positionY: number = _event.clientY - rect.top;
         console.log(positionX, positionY);
+
+        let formData: FormData = new FormData(document.forms[0]); // get form elements
+
+        let name: string = <string>formData.get("Name"); // get name
         
-        let rgba1: number = Math.floor(Math.random() * 255);
-        let rgba2: number = Math.floor(Math.random() * 255);
-        let rgba3: number = Math.floor(Math.random() * 255);
+        let colorPicker1: string = <string>formData.get("Color1"); // get color 1
+        let colorPicker2: string = <string>formData.get("Color2"); // get color 2
 
-        let color: string = "RGB" + "(" + rgba1 + "," + rgba2 + "," + rgba3 + ")";
+        let lifetimeString: string = <string>formData.get("Lifetime"); // get lifetime
+        let lifetime: number = parseInt(lifetimeString);
 
-        for (let i: number = 0; i <= 10; i++) {
+        let amountString: string = <string>formData.get("Amount"); // get amount
+        let amount: number = parseInt(amountString);
+
+        // particles color 1
+        for (let i: number = 0; i <= amount; i++) {
 
             let position: Vector = { x: positionX, y: positionY };
 
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let size: number = 5;
 
-            let circle: Rocket = new Line(position, dx, dy, size, "testRocket", color, color);
+            let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+            
+            //let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+            particles.push(circle);
+            
+        }
+        
+        // particles color 2
+        for (let i: number = 0; i <= amount; i++) {
 
+            let position: Vector = { x: positionX, y: positionY };
+
+            let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
+            let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
+
+            let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker2);
             particles.push(circle);
         }
 
