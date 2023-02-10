@@ -1,8 +1,6 @@
 namespace Feuerwerk {
     export class Circle extends Rocket {
 
-        public shape: SHAPE = SHAPE.CIRCLE;
-
         private radius: number;
 
         constructor(_position: Vector,  _dx: number, _dy: number, _alphaTime: number, _name: string, _color: string) {

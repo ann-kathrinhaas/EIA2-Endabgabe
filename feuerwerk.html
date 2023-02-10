@@ -18,7 +18,7 @@
     <form action="">
         <h2>Create a new rocket</h2>
         <div>
-            <input type="text" name="Text" id="name" placeholder="Rocket name">
+            <input type="text" name="Name" id="name" placeholder="Rocket name">
         </div>
         <div>
             <p id="pColor1">Color 1</p>
@@ -30,23 +30,19 @@
             <p>Particles</p>
             <div id="divShape">
                 <p>Shape</p>
-                <input type="radio"><i class="fa-solid fa-circle"></i>
-                <input type="radio"><i class="fa-solid fa-droplet"></i>
-                <input type="radio"><i class="fa-sharp fa-solid fa-star"></i>
-                <!--
-                <button class="particle" id="particle1"><i class="fa-solid fa-circle"></i></button>
-                <button class="particle" id="particle2"><i class="fa-solid fa-droplet"></i></button>
-                <button class="particle" id="particle3"><i class="fa-sharp fa-solid fa-star"></i></button>-->
-            </div>
-            <div id="divAmount">
-                <p>Amount</p>
-                <input type="range" name="Amount" id="amount" min="5" max="10" step="1" value="5">
+                <input type="radio" class="radioShape" name="Shape" value="circle"><i class="fa-solid fa-circle"></i>
+                <input type="radio" class="radioShape" name="Shape" value="drop"><i class="fa-solid fa-droplet"></i>
+                <input type="radio" class="radioShape" name="Shape" value="star"><i class="fa-sharp fa-solid fa-star"></i>
             </div>
         </div>
         <div>
             <div id="divLifetime">
                 <p>Lifetime</p>
                 <input type="range" name="Lifetime" id="lifetime" min="1" max="5" step="1" value="1">
+            </div>
+            <div id="divAmount">
+                <p>Amount</p>
+                <input type="range" name="Amount" id="amount" min="5" max="10" step="1" value="1">
             </div>
         </div>
         <div>

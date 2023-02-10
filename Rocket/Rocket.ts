@@ -9,7 +9,6 @@ namespace Feuerwerk {
         public name: string;
         public color: string;
         public alpha: number;
-        public shape: SHAPE;
 
         constructor(_position: Vector, _dx: number, _dy: number, _alphaTime: number, _name: string, _color: string) {
             this.position = _position;

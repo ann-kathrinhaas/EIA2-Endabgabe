@@ -2,7 +2,6 @@
 var Feuerwerk;
 (function (Feuerwerk) {
     class Circle extends Feuerwerk.Rocket {
-        shape = Feuerwerk.SHAPE.CIRCLE;
         radius;
         constructor(_position, _dx, _dy, _alphaTime, _name, _color) {
             super(_position, _dx, _dy, _alphaTime, _name, _color);

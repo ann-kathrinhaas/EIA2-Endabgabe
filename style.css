@@ -39,17 +39,26 @@ div {
     margin-left: 0px;
     display: inline-block;
     margin-bottom: 20px;
-    margin-top: -20px;
+    margin-top: -22px;
 }
 
 #divAmount {
     float: right;
     margin-right: 50px;
-    margin-top: -20px;
+    margin-top: -90px;
 }
 
 #divLifetime {
     margin-left: 5px;
+}
+
+.radioShape {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.radioShape[value="drop"], .radioShape[value="star"] {
+    margin-left: 50px;
 }
 
 h2 {
@@ -126,6 +135,7 @@ input[type="range"] {
 
 form, canvas {
     display: block;
+    color: white;
 }
 
 button {

@@ -10,7 +10,6 @@ var Feuerwerk;
         name;
         color;
         alpha;
-        shape;
         constructor(_position, _dx, _dy, _alphaTime, _name, _color) {
             this.position = _position;
             this.dx = _dx;

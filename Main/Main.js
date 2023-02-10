@@ -10,34 +10,12 @@ var Feuerwerk;
 (function (Feuerwerk) {
     let SHAPE;
     (function (SHAPE) {
-        SHAPE[SHAPE["CIRCLE"] = 0] = "CIRCLE";
-        SHAPE[SHAPE["DROP"] = 1] = "DROP";
-        SHAPE[SHAPE["STAR"] = 2] = "STAR";
+        SHAPE["CIRCLE"] = "circle";
+        SHAPE["DROP"] = "drop";
+        SHAPE["STAR"] = "star";
     })(SHAPE = Feuerwerk.SHAPE || (Feuerwerk.SHAPE = {}));
-    /* let shapeButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".particle");
-
-    for (let i: number = 0; i < shapeButtons.length; i++) {
-        shapeButtons.forEach((element) => {
-
-            let active = document.getElementsByClassName("active");
-
-            if (active.length > 0) {
-                active[0].className = active[0].className.replace(" active", "");
-            }
-
-        });
-    } */
-    /*
-        let circleButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle1");
-        circleButton.addEventListener("click", shootRocket);
-    
-        let dropButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle2");
-        dropButton.addEventListener("click", shootRocket);
-    
-        let starButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle3");
-        starButton.addEventListener("click", shootRocket); */
-    window.addEventListener("load", handleLoad);
     let particles = [];
+    window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         let canvas = document.querySelector("#canvas");
         if (!canvas) // siehe Lektion
@@ -45,8 +23,10 @@ var Feuerwerk;
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
         canvas.addEventListener("click", createRocket);
-        let addButton = document.getElementById("addRocket");
+        let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
+        /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
+        addButton.addEventListener("click", addRocket); */
         window.setInterval(update, 20);
     }
     function update() {
@@ -63,54 +43,60 @@ var Feuerwerk;
         let formData = new FormData(document.forms[0]); // get form elements
         let name = formData.get("Name"); // get name
         let colorPicker1 = formData.get("Color1"); // get color 1
-        let colorPicker2 = formData.get("Color2"); // get color 2
-        let lifetimeString = formData.get("Lifetime"); // get lifetime
+        //let colorPicker2: string = <string>formData.get("Color2"); // get color 2
+        let lifetimeString = formData.get("Lifetime"); // get alphatime/lifetime
         let lifetime = parseInt(lifetimeString);
         let amountString = formData.get("Amount"); // get amount
         let amount = parseInt(amountString);
+        let targetShape = formData.get("Shape"); // get string from formdata
+        console.log(targetShape);
+        let currentShape = targetShape;
+        let currentParticle;
         // particles color 1
         for (let i = 0; i <= amount; i++) {
             let position = { x: positionX, y: positionY };
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
-            let circle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker1);
-            particles.push(circle);
-            /* switch() {
+            switch (currentShape) {
                 case SHAPE.CIRCLE:
-                    let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(circle);
+                    currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker1);
                     break;
                 case SHAPE.DROP:
-                    let drop: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(drop);
+                    currentParticle = new Feuerwerk.Drop(position, dx, dy, lifetime, name, colorPicker1);
                     break;
                 case SHAPE.STAR:
-                    let star: Rocket = new Star(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(star);
+                    currentParticle = new Feuerwerk.Star(position, dx, dy, lifetime, name, colorPicker1);
                     break;
-            } */
+                default:
+                    return;
+            }
+            particles.push(currentParticle);
         }
-        // particles color 2
-        for (let i = 0; i <= amount; i++) {
-            let position = { x: positionX, y: positionY };
-            let dx = (Math.random() - 0.5) * (Math.random() * 6);
-            let dy = (Math.random() - 0.5) * (Math.random() * 6);
-            let circle = new Feuerwerk.Star(position, dx, dy, lifetime, name, colorPicker2);
-            particles.push(circle);
-        }
-        console.log(particles);
     }
+    // particles color 2
+    /* for (let i: number = 0; i <= amount; i++) {
+
+        let position: Vector = { x: positionX, y: positionY };
+
+        let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
+        let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
+
+        let circle: Rocket = new Star(position, dx, dy, lifetime, name, colorPicker2);
+        particles.push(circle);
+    }
+
+    console.log(particles); */
     function explosionAnimation() {
         // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
         Feuerwerk.crc2.clearRect(0, 0, canvas.width, canvas.height);
-        for (let circle of particles) {
-            if (circle.alpha <= 0) {
-                let index = particles.indexOf(circle);
+        for (let particle of particles) {
+            if (particle.alpha <= 0) {
+                let index = particles.indexOf(particle);
                 particles.splice(index, 1);
             }
             else {
-                circle.explode();
+                particle.explode();
             }
         }
         //console.log(particles);

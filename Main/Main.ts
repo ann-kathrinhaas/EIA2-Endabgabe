@@ -14,41 +14,18 @@ namespace Feuerwerk {
     }
 
     export enum SHAPE {
-        CIRCLE,
-        DROP,
-        STAR
+        CIRCLE = "circle",
+        DROP = "drop",
+        STAR = "star"
     }
 
-    /* let shapeButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(".particle");
+    export let currentShape: Rocket;
 
-    for (let i: number = 0; i < shapeButtons.length; i++) {
-        shapeButtons.forEach((element) => {
-
-            let active = document.getElementsByClassName("active");
-
-            if (active.length > 0) {
-                active[0].className = active[0].className.replace(" active", "");
-            }
-
-        });
-    } */
-
-/* 
-    let circleButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle1");
-    circleButton.addEventListener("click", shootRocket);
-
-    let dropButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle2");
-    dropButton.addEventListener("click", shootRocket);
-
-    let starButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("particle3");
-    starButton.addEventListener("click", shootRocket); */
+    let particles: Rocket[] = [];
 
     window.addEventListener("load", handleLoad);
 
     export let crc2: CanvasRenderingContext2D;
-
-    let particles: Rocket[] = [];
-
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
@@ -60,8 +37,11 @@ namespace Feuerwerk {
 
         canvas.addEventListener("click", createRocket);
 
-        let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
+        let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
+
+        /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
+        addButton.addEventListener("click", addRocket); */
 
         window.setInterval(update, 20);
     }
@@ -86,13 +66,20 @@ namespace Feuerwerk {
         let name: string = <string>formData.get("Name"); // get name
         
         let colorPicker1: string = <string>formData.get("Color1"); // get color 1
-        let colorPicker2: string = <string>formData.get("Color2"); // get color 2
+        //let colorPicker2: string = <string>formData.get("Color2"); // get color 2
 
-        let lifetimeString: string = <string>formData.get("Lifetime"); // get lifetime
+        let lifetimeString: string = <string>formData.get("Lifetime"); // get alphatime/lifetime
         let lifetime: number = parseInt(lifetimeString);
 
         let amountString: string = <string>formData.get("Amount"); // get amount
         let amount: number = parseInt(amountString);
+
+        let targetShape: string = <string>formData.get("Shape"); // get string from formdata
+        console.log(targetShape);
+
+        let currentShape: string = <string>targetShape;
+
+        let currentParticle: Rocket;
 
         // particles color 1
         for (let i: number = 0; i <= amount; i++) {
@@ -102,28 +89,26 @@ namespace Feuerwerk {
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
 
-            let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
-            particles.push(circle);
-
-            /* switch() {
+            switch (currentShape) {
                 case SHAPE.CIRCLE:
-                    let circle: Rocket = new Circle(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(circle);
+                    currentParticle = new Circle(position, dx, dy, lifetime, name, colorPicker1);
                     break;
                 case SHAPE.DROP:
-                    let drop: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(drop);
+                    currentParticle = new Drop(position, dx, dy, lifetime, name, colorPicker1);
                     break;
                 case SHAPE.STAR:
-                    let star: Rocket = new Star(position, dx, dy, lifetime, name, colorPicker1);
-                    particles.push(star);
+                    currentParticle = new Star(position, dx, dy, lifetime, name, colorPicker1);
                     break;
-            } */
+                default:
+                return;
+            }
+            particles.push(currentParticle);
+        }
 
         }
-        
+
         // particles color 2
-        for (let i: number = 0; i <= amount; i++) {
+        /* for (let i: number = 0; i <= amount; i++) {
 
             let position: Vector = { x: positionX, y: positionY };
 
@@ -134,8 +119,8 @@ namespace Feuerwerk {
             particles.push(circle);
         }
 
-        console.log(particles);
-    }
+        console.log(particles); */
+    
 
     function explosionAnimation(): void {
 
@@ -145,20 +130,19 @@ namespace Feuerwerk {
 
         crc2.clearRect(0, 0, canvas.width, canvas.height);
 
-        for (let circle of particles) {
-            if (circle.alpha <= 0) {
-              let index: number = particles.indexOf(circle);
-              particles.splice(index, 1);
+        for (let particle of particles) {
+            if (particle.alpha <= 0) {
+                let index: number = particles.indexOf(particle);
+                particles.splice(index, 1);
             }
             else {
-              circle.explode(); 
+                particle.explode();
             }
-          }
+        }
 
         //console.log(particles);
-
     }
-
+    
     function addRocket(_event: MouseEvent): void {
         let rocketList: HTMLElement = <HTMLElement>document.getElementById("list");
         /* let formData: FormData = new FormData(document.forms[0]); // get form elements
