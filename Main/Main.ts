@@ -147,11 +147,9 @@ namespace Feuerwerk {
         divRocket.classList.add("divNewRocket");
         rocketList.appendChild(divRocket);
 
-        let radiobutton: HTMLButtonElement = <HTMLButtonElement>document.createElement("input");
-        radiobutton.classList.add("radiobutton");
-        radiobutton.type = "radio";
-        radiobutton.name = "Rocket";
-        divRocket.appendChild(radiobutton);
+        let editButton: HTMLDivElement = <HTMLDivElement>document.createElement("div");
+        editButton.classList.add("fa-solid", "fa-pen-to-square","editbutton");
+        divRocket.appendChild(editButton);
 
         let newRocket: HTMLParagraphElement = document.createElement("p");
         newRocket.classList.add("name");
@@ -164,8 +162,13 @@ namespace Feuerwerk {
         newRocket.appendChild(deleteButton);
 
         divRocket.addEventListener("click", deleteRocket);
+        editButton.addEventListener("click", deleteRocket);
 
         sendItem();
+
+        window.setInterval(function(): void {
+            window.location.reload();
+        }, 100);
 
     }
 
@@ -174,7 +177,7 @@ namespace Feuerwerk {
         let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
         let parentElement: HTMLElement = <HTMLElement>currentTarget.parentElement;
 
-        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash") || target.classList.contains("editbutton")) {
             parentElement.removeChild(currentTarget);
         }
     }

@@ -179,16 +179,19 @@ button:hover {
     left: -45px;
     width: 200px;
     height: 20px;
-    
 }
 
-.radiobutton {
+.editbutton {
     position: absolute;
-    top: -2px;
+    color: white;
     cursor: pointer;
+    margin-top: 0;
+    margin-left: 0;
+    font-size: 20px; 
 }
 
 .name {
+    color: white;
     margin-left: 25px;
 }
 
@@ -196,7 +199,8 @@ button:hover {
     position: relative;
     float: right;
     cursor: pointer;
-    opacity: 0.5;
+    color: white;
+    margin-top: 0;
 }
 
 .deleteButton:hover {
