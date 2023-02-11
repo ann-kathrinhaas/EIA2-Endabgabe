@@ -19,6 +19,8 @@ var Feuerwerk;
         canvas.addEventListener("click", createRocket);
         let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
+        /* let deleteButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector(".deleteButton");
+        deleteButton.addEventListener("click", deleteRocket); */
         /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
         addButton.addEventListener("click", addRocket); */
         window.setInterval(update, 20);
@@ -107,6 +109,15 @@ var Feuerwerk;
         deleteButton.classList.add("deleteButton");
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
         newRocket.appendChild(deleteButton);
+        divRocket.addEventListener("click", deleteRocket);
+    }
+    function deleteRocket(_event) {
+        let target = _event.target;
+        let currentTarget = _event.currentTarget;
+        let parentElement = currentTarget.parentElement;
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
     }
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Main.js.map

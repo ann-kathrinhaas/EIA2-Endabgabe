@@ -34,6 +34,9 @@ namespace Feuerwerk {
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
 
+        /* let deleteButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector(".deleteButton");
+        deleteButton.addEventListener("click", deleteRocket); */
+
         /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
         addButton.addEventListener("click", addRocket); */
 
@@ -154,6 +157,18 @@ namespace Feuerwerk {
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
         newRocket.appendChild(deleteButton);
 
+        divRocket.addEventListener("click", deleteRocket);
+
+    }
+
+    function deleteRocket(_event: MouseEvent): void {
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+        let parentElement: HTMLElement = <HTMLElement>currentTarget.parentElement;
+
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
     }
       
 }

@@ -180,7 +180,8 @@ button:hover {
 
 .radiobutton {
     position: absolute;
-    top: -2px
+    top: -2px;
+    cursor: pointer;
 }
 
 .name {
@@ -190,4 +191,5 @@ button:hover {
 .deleteButton {
     position: relative;
     float: right;
+    cursor: pointer;
 }
