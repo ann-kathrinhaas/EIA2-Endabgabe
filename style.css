@@ -168,3 +168,26 @@ button:hover {
     margin-top: 25px;
     background-color: white;
 }
+
+.divNewRocket {
+    position: relative;
+    top: 80px;
+    left: -45px;
+    width: 200px;
+    height: 20px;
+    
+}
+
+.radiobutton {
+    position: absolute;
+    top: -2px
+}
+
+.name {
+    margin-left: 25px;
+}
+
+.deleteButton {
+    position: relative;
+    float: right;
+}

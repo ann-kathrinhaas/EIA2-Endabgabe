@@ -8,12 +8,6 @@ Quellen: Cindy Nguyen
 */
 var Feuerwerk;
 (function (Feuerwerk) {
-    let SHAPE;
-    (function (SHAPE) {
-        SHAPE["CIRCLE"] = "circle";
-        SHAPE["DROP"] = "drop";
-        SHAPE["STAR"] = "star";
-    })(SHAPE = Feuerwerk.SHAPE || (Feuerwerk.SHAPE = {}));
     let particles = [];
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
@@ -43,7 +37,7 @@ var Feuerwerk;
         let formData = new FormData(document.forms[0]); // get form elements
         let name = formData.get("Name"); // get name
         let colorPicker1 = formData.get("Color1"); // get color 1
-        //let colorPicker2: string = <string>formData.get("Color2"); // get color 2
+        let colorPicker2 = formData.get("Color2"); // get color 2
         let lifetimeString = formData.get("Lifetime"); // get alphatime/lifetime
         let lifetime = parseInt(lifetimeString);
         let amountString = formData.get("Amount"); // get amount
@@ -54,18 +48,25 @@ var Feuerwerk;
         let currentParticle;
         // particles color 1
         for (let i = 0; i <= amount; i++) {
+            let color;
+            if (i < amount / 2) {
+                color = colorPicker1;
+            }
+            else {
+                color = colorPicker2;
+            }
             let position = { x: positionX, y: positionY };
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
             switch (currentShape) {
-                case SHAPE.CIRCLE:
-                    currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker1);
+                case "circle":
+                    currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, color);
                     break;
-                case SHAPE.DROP:
-                    currentParticle = new Feuerwerk.Drop(position, dx, dy, lifetime, name, colorPicker1);
+                case "drop":
+                    currentParticle = new Feuerwerk.Drop(position, dx, dy, lifetime, name, color);
                     break;
-                case SHAPE.STAR:
-                    currentParticle = new Feuerwerk.Star(position, dx, dy, lifetime, name, colorPicker1);
+                case "star":
+                    currentParticle = new Feuerwerk.Star(position, dx, dy, lifetime, name, color);
                     break;
                 default:
                     return;
@@ -73,19 +74,6 @@ var Feuerwerk;
             particles.push(currentParticle);
         }
     }
-    // particles color 2
-    /* for (let i: number = 0; i <= amount; i++) {
-
-        let position: Vector = { x: positionX, y: positionY };
-
-        let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
-        let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-
-        let circle: Rocket = new Star(position, dx, dy, lifetime, name, colorPicker2);
-        particles.push(circle);
-    }
-
-    console.log(particles); */
     function explosionAnimation() {
         // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
@@ -99,32 +87,26 @@ var Feuerwerk;
                 particle.explode();
             }
         }
-        //console.log(particles);
     }
     function addRocket(_event) {
         let rocketList = document.getElementById("list");
-        /* let formData: FormData = new FormData(document.forms[0]); // get form elements
-        let name: string = <string>formData.get("Name"); // get name */
         let name = document.querySelector("#name");
         let divRocket = document.createElement("div");
-        divRocket.classList.add("divRocket");
+        divRocket.classList.add("divNewRocket");
         rocketList.appendChild(divRocket);
-        //divRocket.style.position = "relative";
-        //divRocket.style.top = "20px";
         let radiobutton = document.createElement("input");
         radiobutton.classList.add("radiobutton");
         radiobutton.type = "radio";
+        radiobutton.name = "Rocket";
         divRocket.appendChild(radiobutton);
         let newRocket = document.createElement("p");
         newRocket.classList.add("name");
-        rocketList.appendChild(newRocket);
+        divRocket.appendChild(newRocket);
         newRocket.innerHTML = name.value;
-        //console.log("added: " + name.value);
-        alert("added: " + name.value);
-        let deleteButton = document.createElement("button");
+        let deleteButton = document.createElement("div");
         deleteButton.classList.add("deleteButton");
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
-        divRocket.appendChild(deleteButton);
+        newRocket.appendChild(deleteButton);
     }
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Main.js.map

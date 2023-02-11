@@ -13,12 +13,6 @@ namespace Feuerwerk {
         y: number;
     }
 
-    export enum SHAPE {
-        CIRCLE = "circle",
-        DROP = "drop",
-        STAR = "star"
-    }
-
     export let currentShape: Rocket;
 
     let particles: Rocket[] = [];
@@ -66,7 +60,7 @@ namespace Feuerwerk {
         let name: string = <string>formData.get("Name"); // get name
         
         let colorPicker1: string = <string>formData.get("Color1"); // get color 1
-        //let colorPicker2: string = <string>formData.get("Color2"); // get color 2
+        let colorPicker2: string = <string>formData.get("Color2"); // get color 2
 
         let lifetimeString: string = <string>formData.get("Lifetime"); // get alphatime/lifetime
         let lifetime: number = parseInt(lifetimeString);
@@ -84,20 +78,28 @@ namespace Feuerwerk {
         // particles color 1
         for (let i: number = 0; i <= amount; i++) {
 
+            let color: string;
+
+            if (i < amount / 2) {
+                color = colorPicker1;
+            } else {
+                color = colorPicker2;
+            }
+
             let position: Vector = { x: positionX, y: positionY };
 
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
 
             switch (currentShape) {
-                case SHAPE.CIRCLE:
-                    currentParticle = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+                case "circle":
+                    currentParticle = new Circle(position, dx, dy, lifetime, name, color);
                     break;
-                case SHAPE.DROP:
-                    currentParticle = new Drop(position, dx, dy, lifetime, name, colorPicker1);
+                case "drop":
+                    currentParticle = new Drop(position, dx, dy, lifetime, name, color);
                     break;
-                case SHAPE.STAR:
-                    currentParticle = new Star(position, dx, dy, lifetime, name, colorPicker1);
+                case "star":
+                    currentParticle = new Star(position, dx, dy, lifetime, name, color);
                     break;
                 default:
                 return;
@@ -105,22 +107,7 @@ namespace Feuerwerk {
             particles.push(currentParticle);
         }
 
-        }
-
-        // particles color 2
-        /* for (let i: number = 0; i <= amount; i++) {
-
-            let position: Vector = { x: positionX, y: positionY };
-
-            let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-
-            let circle: Rocket = new Star(position, dx, dy, lifetime, name, colorPicker2);
-            particles.push(circle);
-        }
-
-        console.log(particles); */
-    
+    }
 
     function explosionAnimation(): void {
 
@@ -140,38 +127,33 @@ namespace Feuerwerk {
             }
         }
 
-        //console.log(particles);
     }
     
     function addRocket(_event: MouseEvent): void {
         let rocketList: HTMLElement = <HTMLElement>document.getElementById("list");
-        /* let formData: FormData = new FormData(document.forms[0]); // get form elements
-        let name: string = <string>formData.get("Name"); // get name */
-
+      
         let name: HTMLInputElement = <HTMLInputElement>document.querySelector("#name");
         
         let divRocket: HTMLDivElement = <HTMLDivElement>document.createElement("div");
-        divRocket.classList.add("divRocket");
+        divRocket.classList.add("divNewRocket");
         rocketList.appendChild(divRocket);
-        //divRocket.style.position = "relative";
-        //divRocket.style.top = "20px";
 
         let radiobutton: HTMLButtonElement = <HTMLButtonElement>document.createElement("input");
         radiobutton.classList.add("radiobutton");
         radiobutton.type = "radio";
+        radiobutton.name = "Rocket";
         divRocket.appendChild(radiobutton);
 
         let newRocket: HTMLParagraphElement = document.createElement("p");
         newRocket.classList.add("name");
-        rocketList.appendChild(newRocket);
+        divRocket.appendChild(newRocket);
         newRocket.innerHTML = name.value;
-        //console.log("added: " + name.value);
-        alert("added: " + name.value);
 
-        let deleteButton: HTMLButtonElement = document.createElement("button");
+        let deleteButton: HTMLDivElement = document.createElement("div");
         deleteButton.classList.add("deleteButton");
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
-        divRocket.appendChild(deleteButton);
+        newRocket.appendChild(deleteButton);
+
     }
       
 }
