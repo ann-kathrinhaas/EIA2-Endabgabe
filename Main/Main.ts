@@ -21,7 +21,17 @@ namespace Feuerwerk {
 
     export let crc2: CanvasRenderingContext2D;
 
-    function handleLoad(_event: Event): void {
+    async function handleLoad(_event: Event): Promise<void> {
+
+        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~haasannk/Database/?command=find&collection=Rocketlist");
+        let offer: string = await response.text();
+        //console.log(offer);
+        let dataJson: DataEntries = JSON.parse(offer);
+        console.log("hier startet data.json");
+        console.log(dataJson.data);
+        //console.log("Response", response);
+        //console.log(dataJson);
+
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
         if (!canvas) // siehe Lektion
@@ -34,17 +44,13 @@ namespace Feuerwerk {
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
 
-        /* let deleteButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector(".deleteButton");
-        deleteButton.addEventListener("click", deleteRocket); */
-
-        /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
-        addButton.addEventListener("click", addRocket); */
+        showSavedRockets(dataJson);
 
         window.setInterval(update, 20);
     }
 
     function update(): void {
-        requestAnimationFrame(explosionAnimation);
+        requestAnimationFrame(animateExplosion);
     }
 
     function createRocket(_event: MouseEvent): void {
@@ -112,7 +118,7 @@ namespace Feuerwerk {
 
     }
 
-    function explosionAnimation(): void {
+    function animateExplosion(): void {
 
         // making particle Animation that it fades and splices from Array
 
@@ -159,9 +165,11 @@ namespace Feuerwerk {
 
         divRocket.addEventListener("click", deleteRocket);
 
+        sendItem();
+
     }
 
-    function deleteRocket(_event: MouseEvent): void {
+    export function deleteRocket(_event: MouseEvent): void {
         let target: HTMLElement = <HTMLElement>_event.target;
         let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
         let parentElement: HTMLElement = <HTMLElement>currentTarget.parentElement;

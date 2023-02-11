@@ -169,6 +169,10 @@ button:hover {
     background-color: white;
 }
 
+#addRocket:hover {
+    background-color: rgb(214, 219, 219);
+}
+
 .divNewRocket {
     position: relative;
     top: 80px;
@@ -192,4 +196,9 @@ button:hover {
     position: relative;
     float: right;
     cursor: pointer;
+    opacity: 0.5;
+}
+
+.deleteButton:hover {
+    opacity: 1;
 }

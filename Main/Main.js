@@ -10,7 +10,15 @@ var Feuerwerk;
 (function (Feuerwerk) {
     let particles = [];
     window.addEventListener("load", handleLoad);
-    function handleLoad(_event) {
+    async function handleLoad(_event) {
+        let response = await fetch("https://webuser.hs-furtwangen.de/~haasannk/Database/?command=find&collection=Rocketlist");
+        let offer = await response.text();
+        //console.log(offer);
+        let dataJson = JSON.parse(offer);
+        console.log("hier startet data.json");
+        console.log(dataJson.data);
+        //console.log("Response", response);
+        //console.log(dataJson);
         let canvas = document.querySelector("#canvas");
         if (!canvas) // siehe Lektion
             return;
@@ -19,14 +27,11 @@ var Feuerwerk;
         canvas.addEventListener("click", createRocket);
         let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
-        /* let deleteButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector(".deleteButton");
-        deleteButton.addEventListener("click", deleteRocket); */
-        /* let addButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("addRocket");
-        addButton.addEventListener("click", addRocket); */
+        Feuerwerk.showSavedRockets(dataJson);
         window.setInterval(update, 20);
     }
     function update() {
-        requestAnimationFrame(explosionAnimation);
+        requestAnimationFrame(animateExplosion);
     }
     function createRocket(_event) {
         let canvas = document.querySelector("#canvas");
@@ -76,7 +81,7 @@ var Feuerwerk;
             particles.push(currentParticle);
         }
     }
-    function explosionAnimation() {
+    function animateExplosion() {
         // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
         Feuerwerk.crc2.clearRect(0, 0, canvas.width, canvas.height);
@@ -110,6 +115,7 @@ var Feuerwerk;
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
         newRocket.appendChild(deleteButton);
         divRocket.addEventListener("click", deleteRocket);
+        Feuerwerk.sendItem();
     }
     function deleteRocket(_event) {
         let target = _event.target;
@@ -119,5 +125,6 @@ var Feuerwerk;
             parentElement.removeChild(currentTarget);
         }
     }
+    Feuerwerk.deleteRocket = deleteRocket;
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Main.js.map
