@@ -21,19 +21,14 @@ var Feuerwerk;
             newRocket.classList.add("name");
             divRocket.appendChild(newRocket);
             newRocket.innerHTML = entry.Name;
+            // Deletebutton Event
             let deleteButton = document.createElement("div");
             deleteButton.classList.add("deleteButton");
             deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
             newRocket.appendChild(deleteButton);
             divRocket.addEventListener("click", Feuerwerk.deleteRocket);
+            // Editbutton Event
             deleteButton.addEventListener("click", function () {
-                removeFromDatalist(entryID);
-                window.setInterval(function () {
-                    window.location.reload();
-                }, 500);
-            });
-            editButton.addEventListener("click", function () {
-                editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
                 window.setInterval(function () {
                     window.location.reload();
