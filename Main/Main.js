@@ -13,14 +13,9 @@ var Feuerwerk;
     async function handleLoad(_event) {
         let response = await fetch("https://webuser.hs-furtwangen.de/~haasannk/Database/?command=find&collection=Rocketlist");
         let offer = await response.text();
-        //console.log(offer);
         let dataJson = JSON.parse(offer);
-        console.log("hier startet data.json");
-        console.log(dataJson.data);
-        //console.log("Response", response);
-        //console.log(dataJson);
         let canvas = document.querySelector("#canvas");
-        if (!canvas) // siehe Lektion
+        if (!canvas)
             return;
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
@@ -35,25 +30,22 @@ var Feuerwerk;
     }
     function createRocket(_event) {
         let canvas = document.querySelector("#canvas");
-        //DomRect = getBoundingClientrect gibt wieder an welcher Position das Objekt ist, es auf dem HTML ist.
-        //Bzw, Wo das Canvas im HTML ist. Positioniert dieses und somit kann man die x und y Werte vom Canvas lesen.
         let rect = canvas.getBoundingClientRect();
         let positionX = _event.clientX - rect.left;
         let positionY = _event.clientY - rect.top;
         console.log(positionX, positionY);
-        let formData = new FormData(document.forms[0]); // get form elements
-        let name = formData.get("Name"); // get name
-        let colorPicker1 = formData.get("Color1"); // get color 1
-        let colorPicker2 = formData.get("Color2"); // get color 2
-        let lifetimeString = formData.get("Lifetime"); // get alphatime/lifetime
+        let formData = new FormData(document.forms[0]);
+        let name = formData.get("Name");
+        let colorPicker1 = formData.get("Color1");
+        let colorPicker2 = formData.get("Color2");
+        let lifetimeString = formData.get("Lifetime");
         let lifetime = parseInt(lifetimeString);
-        let amountString = formData.get("Amount"); // get amount
+        let amountString = formData.get("Amount");
         let amount = parseInt(amountString);
-        let targetShape = formData.get("Shape"); // get string from formdata
+        let targetShape = formData.get("Shape");
         console.log(targetShape);
         let currentShape = targetShape;
         let currentParticle;
-        // particles color 1
         for (let i = 0; i <= amount; i++) {
             let color;
             if (i < amount / 2) {
@@ -82,7 +74,6 @@ var Feuerwerk;
         }
     }
     function animateExplosion() {
-        // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
         Feuerwerk.crc2.clearRect(0, 0, canvas.width, canvas.height);
         for (let particle of particles) {
@@ -115,9 +106,9 @@ var Feuerwerk;
         divRocket.addEventListener("click", deleteRocket);
         editButton.addEventListener("click", deleteRocket);
         Feuerwerk.sendItem();
-        /* window.setInterval(function(): void {
+        window.setInterval(function () {
             window.location.reload();
-        },                 500); */
+        }, 500);
     }
     function deleteRocket(_event) {
         let target = _event.target;

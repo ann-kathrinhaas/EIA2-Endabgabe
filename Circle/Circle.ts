@@ -11,7 +11,7 @@ namespace Feuerwerk {
 
         public draw(): void {
             crc2.save();
-            this.drawArc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI, this.color);
+            this.drawArc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
             crc2.restore();
         }
 
@@ -19,11 +19,11 @@ namespace Feuerwerk {
             super.explode();
         }
 
-        private drawArc(_x: number, _y: number, _radius: number, _startAngle: number, _endAngle: number, _color: string): void {
+        private drawArc(_x: number, _y: number, _radius: number, _startAngle: number, _endAngle: number): void {
             crc2.beginPath();
             crc2.globalAlpha = this.alpha;
             crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
-            crc2.fillStyle = _color;
+            crc2.fillStyle = this.color;
             crc2.fill();
             crc2.closePath();
         }

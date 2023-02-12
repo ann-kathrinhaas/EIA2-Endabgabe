@@ -9,17 +9,17 @@ var Feuerwerk;
         }
         draw() {
             Feuerwerk.crc2.save();
-            this.drawArc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI, this.color);
+            this.drawArc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
             Feuerwerk.crc2.restore();
         }
         explode() {
             super.explode();
         }
-        drawArc(_x, _y, _radius, _startAngle, _endAngle, _color) {
+        drawArc(_x, _y, _radius, _startAngle, _endAngle) {
             Feuerwerk.crc2.beginPath();
             Feuerwerk.crc2.globalAlpha = this.alpha;
             Feuerwerk.crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
-            Feuerwerk.crc2.fillStyle = _color;
+            Feuerwerk.crc2.fillStyle = this.color;
             Feuerwerk.crc2.fill();
             Feuerwerk.crc2.closePath();
         }
