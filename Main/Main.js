@@ -10,7 +10,7 @@ var Feuerwerk;
 (function (Feuerwerk) {
     let particles = [];
     window.addEventListener("load", handleLoad);
-    async function handleLoad(_event) {
+    async function handleLoad() {
         let response = await fetch("https://webuser.hs-furtwangen.de/~haasannk/Database/?command=find&collection=Rocketlist");
         let offer = await response.text();
         let dataJson = JSON.parse(offer);
@@ -18,7 +18,6 @@ var Feuerwerk;
         if (!canvas)
             return;
         Feuerwerk.crc2 = canvas.getContext("2d");
-        console.log("Canvas");
         canvas.addEventListener("click", createRocket);
         let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
@@ -33,7 +32,6 @@ var Feuerwerk;
         let rect = canvas.getBoundingClientRect();
         let positionX = _event.clientX - rect.left;
         let positionY = _event.clientY - rect.top;
-        console.log(positionX, positionY);
         let formData = new FormData(document.forms[0]);
         let name = formData.get("Name");
         let colorPicker1 = formData.get("Color1");
@@ -43,7 +41,6 @@ var Feuerwerk;
         let amountString = formData.get("Amount");
         let amount = parseInt(amountString);
         let targetShape = formData.get("Shape");
-        console.log(targetShape);
         let currentShape = targetShape;
         let currentParticle;
         for (let i = 0; i <= amount; i++) {

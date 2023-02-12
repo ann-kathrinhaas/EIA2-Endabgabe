@@ -11,8 +11,6 @@ namespace Feuerwerk {
     // Funktion um die Datenbankliste anzeigen zu lassen
     export async function showSavedRockets(_data: DataEntries): Promise <void> {
 
-        let formData: FormData = new FormData(document.forms[0]);
-
         let entries: any[] = [];
 
         for (let entry in _data.data) {
@@ -81,6 +79,8 @@ namespace Feuerwerk {
         console.log("test");
         let url: string = "https://webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response: Response = await fetch(url + query.toString());
+        console.log(response);
+        console.log("data.sent");
     }
 
     export async function removeFromDatalist(_dataID: number): Promise<void> {
@@ -92,11 +92,12 @@ namespace Feuerwerk {
 
         let url: string = "https://webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response: Response = await fetch(url + query.toString());
+        console.log(response);
+        console.log("delete");
+        console.log(_dataID);
     }
 
     export function editRocket(_rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
-
-        let formData: FormData = new FormData(document.forms[0]);
 
         console.log("edit list element");
         let name: HTMLInputElement = <HTMLInputElement>document.querySelector("#name");

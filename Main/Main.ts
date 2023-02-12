@@ -21,7 +21,7 @@ namespace Feuerwerk {
 
     export let crc2: CanvasRenderingContext2D;
 
-    async function handleLoad(_event: Event): Promise<void> {
+    async function handleLoad(): Promise<void> {
         let response: Response = await fetch("https://webuser.hs-furtwangen.de/~haasannk/Database/?command=find&collection=Rocketlist");
         let offer: string = await response.text();
         let dataJson: DataEntries = JSON.parse(offer);
@@ -31,7 +31,6 @@ namespace Feuerwerk {
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-        console.log("Canvas");
 
         canvas.addEventListener("click", createRocket);
 
@@ -54,7 +53,6 @@ namespace Feuerwerk {
 
         let positionX: number = _event.clientX - rect.left;
         let positionY: number = _event.clientY - rect.top;
-        console.log(positionX, positionY);
 
         let formData: FormData = new FormData(document.forms[0]);
 
@@ -70,7 +68,6 @@ namespace Feuerwerk {
         let amount: number = parseInt(amountString);
 
         let targetShape: string = <string>formData.get("Shape");
-        console.log(targetShape);
 
         let currentShape: string = <string>targetShape;
 

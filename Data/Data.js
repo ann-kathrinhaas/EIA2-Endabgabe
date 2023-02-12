@@ -3,7 +3,6 @@ var Feuerwerk;
 (function (Feuerwerk) {
     // Funktion um die Datenbankliste anzeigen zu lassen
     async function showSavedRockets(_data) {
-        let formData = new FormData(document.forms[0]);
         let entries = [];
         for (let entry in _data.data) {
             entries.push(entry);
@@ -58,6 +57,8 @@ var Feuerwerk;
         console.log("test");
         let url = "https://webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response = await fetch(url + query.toString());
+        console.log(response);
+        console.log("data.sent");
     }
     Feuerwerk.sendItem = sendItem;
     async function removeFromDatalist(_dataID) {
@@ -67,10 +68,12 @@ var Feuerwerk;
         query.set("id", _dataID.toString());
         let url = "https://webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response = await fetch(url + query.toString());
+        console.log(response);
+        console.log("delete");
+        console.log(_dataID);
     }
     Feuerwerk.removeFromDatalist = removeFromDatalist;
     function editRocket(_rocketName, _color1, _color2, _shape, _amount, _lifeTime) {
-        let formData = new FormData(document.forms[0]);
         console.log("edit list element");
         let name = document.querySelector("#name");
         name.value = _rocketName;
