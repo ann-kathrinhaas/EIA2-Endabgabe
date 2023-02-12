@@ -104,7 +104,7 @@ namespace Feuerwerk {
         query.set("data", JSON.stringify(json));
         console.log(JSON.stringify(json));
         console.log("test");
-        let url: string = "https:webuser.hs-furtwangen.de/~haasannk/Database/?";
+        let url: string = "https//:webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response: Response = await fetch(url + query.toString());
         console.log(response);
         console.log("data.sent");
@@ -117,7 +117,7 @@ namespace Feuerwerk {
         query.set("collection", "Rocketlist");
         query.set("id", _dataID.toString());
 
-        let url: string = "https:webuser.hs-furtwangen.de/~haasannk/Database/?";
+        let url: string = "https//:webuser.hs-furtwangen.de/~haasannk/Database/?";
         let response: Response = await fetch(url + query.toString());
         console.log(response);
         console.log("delete");

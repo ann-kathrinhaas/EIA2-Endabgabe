@@ -3,7 +3,7 @@
 Aufgabe: Endabgabe – Feuerwerk
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: XX.02.23
+Datum: 12.02.23
 Quellen: Cindy Nguyen
 */
 var Feuerwerk;
@@ -115,9 +115,9 @@ var Feuerwerk;
         divRocket.addEventListener("click", deleteRocket);
         editButton.addEventListener("click", deleteRocket);
         Feuerwerk.sendItem();
-        window.setInterval(function () {
+        /* window.setInterval(function(): void {
             window.location.reload();
-        }, 500);
+        },                 500); */
     }
     function deleteRocket(_event) {
         let target = _event.target;

@@ -2,7 +2,7 @@
 Aufgabe: Endabgabe – Feuerwerk
 Name: Ann-Kathrin Haas
 Matrikel: 271111
-Datum: XX.02.23
+Datum: 12.02.23
 Quellen: Cindy Nguyen
 */
 
@@ -148,7 +148,7 @@ namespace Feuerwerk {
         rocketList.appendChild(divRocket);
 
         let editButton: HTMLDivElement = <HTMLDivElement>document.createElement("div");
-        editButton.classList.add("fa-solid", "fa-pen-to-square","editbutton");
+        editButton.classList.add("fa-solid", "fa-pen-to-square", "editbutton");
         divRocket.appendChild(editButton);
 
         let newRocket: HTMLParagraphElement = document.createElement("p");
@@ -166,9 +166,9 @@ namespace Feuerwerk {
 
         sendItem();
 
-        window.setInterval(function(): void {
+        /* window.setInterval(function(): void {
             window.location.reload();
-        },                 500);
+        },                 500); */
 
     }
 
