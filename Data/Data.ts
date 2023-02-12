@@ -38,7 +38,6 @@ namespace Feuerwerk {
             divRocket.appendChild(newRocket);
             newRocket.innerHTML = entry.Name;
 
-            // Deletebutton Event
             let deleteButton: HTMLDivElement = document.createElement("div");
             deleteButton.classList.add("deleteButton");
             deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
@@ -46,12 +45,18 @@ namespace Feuerwerk {
 
             divRocket.addEventListener("click", deleteRocket);
 
-            // Editbutton Event
+            // Deletebutton Event
             deleteButton.addEventListener("click", function (): void {
                 removeFromDatalist(entryID);
                 window.setInterval(function(): void {
                     window.location.reload();
                 },                 500);
+            });
+
+            // Editbutton Event
+            editButton.addEventListener("click", function (): void {
+                editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
+                removeFromDatalist(entryID);
             });
         }
 
