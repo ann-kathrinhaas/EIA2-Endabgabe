@@ -2,7 +2,7 @@
 var Feuerwerk;
 (function (Feuerwerk) {
     //Funktion um die Datenbankliste anzeigen zu lassen
-    function showSavedRockets(_data) {
+    async function showSavedRockets(_data) {
         let formData = new FormData(document.forms[0]);
         console.log(_data);
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)
@@ -46,6 +46,7 @@ var Feuerwerk;
                 editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
             });
+            console.log(entry.Shape);
             /*    console.log("Hier ist entryID");
                console.log(entryID[12]); */
         }
@@ -89,6 +90,7 @@ var Feuerwerk;
     }
     Feuerwerk.removeFromDatalist = removeFromDatalist;
     function editRocket(_rocketName, _color1, _color2, _shape, _amount, _lifeTime) {
+        let formData = new FormData(document.forms[0]);
         console.log("edit list element");
         let name = document.querySelector("#name");
         name.value = _rocketName;
@@ -98,61 +100,29 @@ var Feuerwerk;
         color2.value = _color2;
         /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
            shape.value = _shape; */
+        // Gett String from formdata
+        let circleRadio = document.getElementById("circle");
+        let dropRadio = document.getElementById("drop");
+        let starRadio = document.getElementById("star");
+        console.log("hier ist edit Shape Aussage");
+        console.log(_shape);
+        switch (_shape) {
+            case "circle":
+                circleRadio.checked = true;
+                break;
+            case "drop":
+                dropRadio.checked = true;
+                break;
+            case "star":
+                starRadio.checked = true;
+                break;
+            default:
+        }
         let amount = document.querySelector("#amount");
         amount.value = _amount;
         let lifetime = document.querySelector("#lifetime");
         lifetime.value = _lifeTime;
     }
     Feuerwerk.editRocket = editRocket;
-    /*  function activeRocket2(_entryID: number, _rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
-         console.log("edit list element");
- 
-         let formData: FormData = new FormData(document.forms[0]);
- 
- 
-         // Get Name
-         let name: string = <string>formData.get("Name");
-         name = _rocketName;
- 
-         // Get Color
-         let colorPicker1: string = <string>formData.get("Color1");
-         colorPicker1 = _color1;
- 
-         let colorPicker2: string = <string>formData.get("Color2");
-         colorPicker2 = _color2;
- 
-         // alphaTime/Lifetime
-         let lifetimeString: string = <string>formData.get("Lifetime");
-         lifetimeString = _lifeTime;
- 
-         // Amount
-         let amountString: string = <string>formData.get("Amount");
-         amountString = _amount;
- 
- 
-         // Gett String from formdata
-         let targetShape: string = <string>formData.get("Shape");
- 
-         let activeShape: string = _shape;
- 
-         switch (activeShape) {
-             case "circle":
-                 targetShape = "circle";
-                 break;
-             case "drop":
-                 targetShape = "drop";
-                 break;
-             case "star":
-                 targetShape = "star";
-                 break;
-             default:
-         }
- 
-         removeFromDatalist(_entryID);
- 
-         console.log("aktivFUnktion AN");
- 
-     }
-  */
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Data.js.map

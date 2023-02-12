@@ -168,7 +168,7 @@ namespace Feuerwerk {
 
         window.setInterval(function(): void {
             window.location.reload();
-        }, 100);
+        },                 500);
 
     }
 
